@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SISTEA | Soluciones energéticas y climáticas de alto rendimiento</title>
+  <meta name="description" content="SISTEA S.A. de C.V. desarrolla soluciones integradas de climatización, refrigeración, ventilación, energía fotovoltaica con baterías y automatización inteligente para empresas, hospitales, hoteles e industria." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2e;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #b9c4d3;
+      --accent: #d4af37;
+      --accent-dark: #b18b16;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 18px 50px rgba(0,0,0,0.28);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,0.14), transparent 28%),
+        radial-gradient(circle at right center, rgba(62,122,255,0.12), transparent 26%),
+        linear-gradient(180deg, #06101d 0%, #0a1626 48%, #07111f 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 17, 31, 0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(255,255,255,0.15));
+      display: grid;
+      place-items: center;
+      color: #07111f;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover {
+      background: rgba(212,175,55,0.16);
+      border-color: rgba(212,175,55,0.55);
+      color: #fff;
+    }
+
+    .hero {
+      padding: 84px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.24);
+      color: #f7e3a0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.7rem);
+      line-height: 1.04;
+      margin: 0 0 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 0 26px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #efcf64);
+      color: #07111f;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -30% auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(212,175,55,0.22), transparent 62%);
+      pointer-events: none;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .logo-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .logo-box {
+      min-height: 82px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .metric-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .metric-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .metric-card span {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .reference-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .reference-card small {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #f6dfa1;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .grid-3,
+    .grid-4,
+    .grid-2 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.16rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .highlight {
+      color: #f6dfa1;
+      font-weight: 700;
+    }
+
+    .trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .trust .pill {
+      font-weight: 700;
+      color: #d9e2ef;
+    }
+
+    .process-step {
+      position: relative;
+      padding-top: 12px;
+    }
+
+    .process-step::before {
+      content: attr(data-step);
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.16);
+      border: 1px solid rgba(212,175,55,0.35);
+      color: #f6dfa1;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .cta-panel {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .contact-list strong {
+      color: var(--text);
+      min-width: 110px;
+      display: inline-block;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: #1f9d52;
+      color: #fff;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.3);
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .flag-de {
+      width: 26px;
+      height: 16px;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      margin-left: 10px;
+      flex: 0 0 auto;
+    }
+
+    .flag-de span { display: block; height: 33.33%; }
+    .flag-de .black { background: #111; }
+    .flag-de .red { background: #c53030; }
+    .flag-de .gold { background: #d4af37; }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .cta-panel,
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .metric-band,
+      .reference-grid,
+      .logo-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.2rem; }
+      .hero { padding-top: 56px; }
+      .hero-card, .card { padding: 20px; }
+      .whatsapp-float span.label { display: none; }
+      .whatsapp-float { padding: 12px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-label="SISTEA logo">S</div>
+        <div class="brand-text">
+          <strong>SISTEA S.A. de C.V.</strong>
+          <span data-i18n="brand_subtitle">Ingeniería energética y climática de alto rendimiento</span>
+        </div>
+        <div class="flag-de" title="Ingeniería alemana">
+          <span class="black"></span>
+          <span class="red"></span>
+          <span class="gold"></span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#soluciones" data-i18n="nav_solutions">Soluciones</a>
+        <a href="#sectores" data-i18n="nav_sectors">Sectores</a>
+        <a href="#proceso" data-i18n="nav_process">Proceso</a>
+        <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+      </div>
+
+      <div class="lang-switch" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow" data-i18n="eyebrow">Tecnología europea. Ejecución local. Resultados medibles.</div>
+          <h1 data-i18n="hero_title">Reduce costos. Mejora EBITDA. Libera flujo de caja. Convierte energía en ventaja financiera.</h1>
+          <p data-i18n="hero_text">SISTEA estructura proyectos donde ingeniería y finanzas trabajan juntas. Menor gasto operativo, mayor previsibilidad y mejor retorno sobre capital invertido.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://wa.me/50379040432" target="_blank" rel="noopener" data-i18n="hero_cta_primary">Solicita tu diagnóstico estratégico</a>
+            <a class="btn btn-secondary" href="#contacto" data-i18n="hero_cta_secondary">Habla con SISTEA</a>
+          </div>
+          <div class="hero-meta">
+            <div class="pill" data-i18n="meta_1">Diseñado para directivos y propietarios</div>
+            <div class="pill" data-i18n="meta_2">Financiamiento verde desde 1,5 % hasta 6,71 % posible*</div>
+            <div class="pill" data-i18n="meta_3">*Sujeto a historial bancario y perfil del proyecto</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3 data-i18n="card_title">Ventaja competitiva SISTEA</h3>
+          <p data-i18n="card_text">También suministramos componentes individuales y soluciones específicas. Nuestro enfoque principal y mayor capacidad están en proyectos complejos de principio a fin: planificación, financiamiento, suministro e instalación bajo una sola responsabilidad.</p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong data-i18n="stat_1_value">5</strong>
+              <span data-i18n="stat_1_label">módulos integrados en el sistema climático SISTEA</span>
+            </div>
+            <div class="stat">
+              <strong data-i18n="stat_2_value">EBITDA</strong>
+              <span data-i18n="stat_2_label">impacto directo en margen y flujo de caja</span>
+            </div>
+            <div class="stat">
+              <strong data-i18n="stat_3_value">90%+</strong>
+              <span data-i18n="stat_3_label">ahorro potencial con fotovoltaica integrada</span>
+            </div>
+            <div class="stat">
+              <strong data-i18n="stat_4_value">ROI</strong>
+              <span data-i18n="stat_4_label">retorno orientado a resultados medibles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="trust_title">Confianza para decisiones de inversión</h2>
+          <p data-i18n="trust_text">SISTEA conecta ingeniería, eficiencia energética, implementación y estructura financiera en proyectos con visión ejecutiva.</p>
+        </div>
+        <div class="trust">
+          <div class="pill" data-i18n="green_finance">Financiamiento verde 1,5 % – 6,71 %*</div>
+          <div class="pill" data-i18n="trust_1">Industria</div>
+          <div class="pill" data-i18n="trust_2">Hospitales</div>
+          <div class="pill" data-i18n="trust_3">Hoteles</div>
+          <div class="pill" data-i18n="trust_4">Centros logísticos</div>
+          <div class="pill" data-i18n="trust_5">Desarrollos inmobiliarios</div>
+          <div class="pill" data-i18n="trust_6">Cadena de frío</div>
+        </div>
+      </div>
+            <div class="logo-strip">
+          <div class="logo-box" data-i18n="logo_1">Industria</div>
+          <div class="logo-box" data-i18n="logo_2">Hospitales</div>
+          <div class="logo-box" data-i18n="logo_3">Hoteles</div>
+          <div class="logo-box" data-i18n="logo_4">Cadena de frío</div>
+          <div class="logo-box" data-i18n="logo_5">Desarrolladores</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="metric-band">
+          <div class="metric-card">
+            <strong data-count="70">0%</strong>
+            <span data-i18n="metric_1">Ahorro posible en climatización con sistemas adiabáticos en dos etapas</span>
+          </div>
+          <div class="metric-card">
+            <strong data-count="90">0%+</strong>
+            <span data-i18n="metric_2">Ahorro energético posible con integración fotovoltaica</span>
+          </div>
+          <div class="metric-card">
+            <strong data-count="1.5">0%</strong>
+            <span data-i18n="metric_3">Financiamiento verde posible desde 1,5 % según perfil bancario</span>
+          </div>
+          <div class="metric-card">
+            <strong data-count="360">0°</strong>
+            <span data-i18n="metric_4">Planificación, financiamiento e instalación bajo una sola responsabilidad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="soluciones">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="solutions_title">Soluciones que aumentan rentabilidad y reducen riesgo</h2>
+          <p data-i18n="solutions_text">Cada proyecto busca resultados medibles: menos costo energético, mejor desempeño técnico, mayor independencia energética y retorno financiero sólido.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3 data-i18n="sol_1_title">Climatización industrial de alto rendimiento</h3>
+            <p data-i18n="sol_1_text">Sistemas de deshumidificación, enfriamiento adiabático en dos etapas y control inteligente para ambientes exigentes con enfoque en confort, proceso y eficiencia.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sol_2_title">Energía fotovoltaica con almacenamiento</h3>
+            <p data-i18n="sol_2_text">Autogeneración, almacenamiento en baterías y gestión de cargas para reducir fuertemente la compra de energía de red. En muchos casos se logran ahorros superiores a 90 % combinados con sistemas eficientes.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sol_3_title">Automatización inteligente</h3>
+            <p data-i18n="sol_3_text">Control centralizado de sistemas climáticos y energéticos con lógica de operación optimizada, datos útiles y decisiones técnicas mejor fundamentadas.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sol_4_title">Refrigeración y cadena de frío</h3>
+            <p data-i18n="sol_4_text">Soluciones para preservar producto, mejorar estabilidad térmica y contener pérdidas energéticas en instalaciones comerciales e industriales.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sol_5_title">Ventilación y calidad de aire</h3>
+            <p data-i18n="sol_5_text">Diseño de ventilación mecánica, renovación de aire y control ambiental para espacios donde la salud, la productividad y la continuidad importan.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sol_6_title">Recubrimientos térmicos y protección superficial</h3>
+            <p data-i18n="sol_6_text">Aplicaciones interiores y exteriores para reducir carga térmica, reforzar durabilidad y mejorar el desempeño global del inmueble.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sectores">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="sectors_title">Pensado para entornos donde fallar cuesta caro</h2>
+          <p data-i18n="sectors_text">Trabajamos para organizaciones que necesitan continuidad, control de costos y decisiones basadas en datos.</p>
+        </div>
+        <div class="grid-4">
+          <article class="card">
+            <h3 data-i18n="sector_1_title">Industria</h3>
+            <p data-i18n="sector_1_text">Producción más estable, menor carga térmica y mejor control de consumo.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sector_2_title">Hospitales</h3>
+            <p data-i18n="sector_2_text">Confort crítico, aire más seguro y alta confiabilidad operativa.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sector_3_title">Hoteles</h3>
+            <p data-i18n="sector_3_text">Experiencia superior para el huésped con costos energéticos más controlados.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="sector_4_title">Bienes raíces y comercio</h3>
+            <p data-i18n="sector_4_text">Mayor valor operativo del activo y mejor posicionamiento técnico del proyecto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="adv_title">Por qué fondos, propietarios y CFO nos escuchan</h2>
+          <p data-i18n="adv_text">Porque una mala estructura energética reduce utilidades cada mes. Nosotros alineamos ingeniería, CAPEX y financiamiento para proteger capital y elevar valor empresarial.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3 data-i18n="adv_1_title">Un solo enfoque. Menos fricción.</h3>
+            <ul>
+              <li data-i18n="adv_1_li_1">Ingeniería, análisis de viabilidad y dirección de proyecto.</li>
+              <li data-i18n="adv_1_li_2">Integración de energía, clima, control y eficiencia.</li>
+              <li data-i18n="adv_1_li_3">Interlocución clara para dirección, operaciones y finanzas.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="adv_2_title">Resultados que impactan el negocio</h3>
+            <ul>
+              <li data-i18n="adv_2_li_1">Menor consumo eléctrico, mayor margen operativo y mejor estabilidad.</li>
+              <li data-i18n="adv_2_li_2">Mayor resiliencia frente a picos tarifarios, demanda y fallas de red.</li>
+              <li data-i18n="adv_2_li_3">Base sólida para inversión, expansión y financiamiento verde competitivo.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="reference_title">Dónde aportamos más valor</h2>
+          <p data-i18n="reference_text">Nuestros proyectos generan impacto cuando el consumo energético, la carga térmica, la continuidad operativa y la presión sobre márgenes exigen una solución integral.</p>
+        </div>
+        <div class="reference-grid">
+          <article class="reference-card">
+            <small data-i18n="ref_tag_1">Industria</small>
+            <h3 data-i18n="ref_title_1">Producción con alta carga térmica</h3>
+            <p data-i18n="ref_text_1">Sistemas climáticos y energéticos para reducir costos operativos, estabilizar procesos y mejorar condiciones de trabajo.</p>
+          </article>
+          <article class="reference-card">
+            <small data-i18n="ref_tag_2">Hospitales y hoteles</small>
+            <h3 data-i18n="ref_title_2">Confort crítico y continuidad</h3>
+            <p data-i18n="ref_text_2">Soluciones para mantener calidad ambiental, confiabilidad y control de costos donde la operación no puede detenerse.</p>
+          </article>
+          <article class="reference-card">
+            <small data-i18n="ref_tag_3">Inversión</small>
+            <h3 data-i18n="ref_title_3">Proyectos con lógica técnica y financiera</h3>
+            <p data-i18n="ref_text_3">Estructuración enfocada en ahorro real, retorno medible, mejor previsibilidad y base sólida para financiamiento verde.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proceso">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="process_title">Así trabajamos</h2>
+          <p data-i18n="process_text">Proceso claro. Enfoque ejecutivo. Decisiones basadas en datos y factibilidad.</p>
+        </div>
+        <div class="grid-4">
+          <article class="card process-step" data-step="1">
+            <h3 data-i18n="process_1_title">Diagnóstico</h3>
+            <p data-i18n="process_1_text">Analizamos consumo, cargas, operación, prioridades y restricciones reales.</p>
+          </article>
+          <article class="card process-step" data-step="2">
+            <h3 data-i18n="process_2_title">Diseño</h3>
+            <p data-i18n="process_2_text">Desarrollamos una solución integrada con lógica técnica y económica.</p>
+          </article>
+          <article class="card process-step" data-step="3">
+            <h3 data-i18n="process_3_title">Implementación</h3>
+            <p data-i18n="process_3_text">Coordinamos ejecución, proveedores, ingeniería de detalle y control de calidad.</p>
+          </article>
+          <article class="card process-step" data-step="4">
+            <h3 data-i18n="process_4_title">Optimización</h3>
+            <p data-i18n="process_4_text">Ajustamos operación y acompañamos para sostener el desempeño en el tiempo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container cta-panel">
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 16px;">
+            <h2 data-i18n="contact_title">Tu próxima decisión puede mejorar EBITDA durante años</h2>
+            <p data-i18n="contact_text">Solicita una evaluación CFO Edition 2026. Detectamos ahorro potencial, estimamos impacto en EBITDA, analizamos financiamiento verde y definimos la ruta de mayor retorno para tu empresa.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://wa.me/50379040432" target="_blank" rel="noopener" data-i18n="contact_cta_1">Agenda evaluación por WhatsApp</a>
+            <a class="btn btn-secondary" href="mailto:info@sisteasv.com" data-i18n="contact_cta_2">Solicitar propuesta ejecutiva</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="contact_box_title">Contacto</h3>
+          <div class="contact-list">
+            <div><strong data-i18n="contact_label_company">Empresa:</strong> SISTEA S.A. de C.V.</div>
+            <div><strong data-i18n="contact_label_phone">Teléfono:</strong> +503 77 28 26 24</div>
+            <div><strong data-i18n="contact_label_whatsapp">WhatsApp:</strong> +503 77 28 26 24</div>
+            <div><strong data-i18n="contact_label_email">Correo:</strong> info@sisteasv.com</div>
+            <div><strong data-i18n="contact_label_web">Sitio web:</strong> www.sisteasv.com</div>
+            <div><strong data-i18n="contact_label_location">Ubicación:</strong> San Salvador, El Salvador</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span data-i18n="footer_text">SISTEA S.A. de C.V. | Soluciones sostenibles de climatización, refrigeración, ventilación y energía para Centroamérica.</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/50379040432" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <span aria-hidden="true">WhatsApp</span>
+    <span class="label" data-i18n="whatsapp_label">Contacto directo</span>
+  </a>
+
+  <script>
+    const translations = {
+      es: {
+        brand_subtitle: "Ingeniería energética y climática de alto rendimiento",
+        nav_solutions: "Soluciones",
+        nav_sectors: "Sectores",
+        nav_process: "Proceso",
+        nav_contact: "Contacto",
+        eyebrow: "Tecnología europea. Ejecución local. Resultados medibles.",
+        hero_title: "Reduce tu costo energético. Mejora tu clima interior. Fortalece tu operación.",
+        hero_text: "SISTEA integra climatización, refrigeración, ventilación, energía fotovoltaica con almacenamiento en baterías, automatización inteligente y recubrimientos térmicos para empresas que exigen eficiencia, confiabilidad y control.",
+        hero_cta_primary: "Solicita tu diagnóstico estratégico",
+        hero_cta_secondary: "Habla con SISTEA",
+        meta_1: "Diseñado para quienes toman decisiones",
+        meta_2: "Orientado a ahorro real y continuidad operativa",
+        meta_3: "Enfoque técnico, financiero y ejecutivo",
+        card_title: "Lo que resuelve SISTEA",
+        card_text: "No vendemos componentes aislados. Diseñamos sistemas integrados para reducir consumo, bajar demanda pico, estabilizar operación y crear una base sólida para crecimiento.",
+        stat_1_value: "5",
+        stat_1_label: "módulos integrados en el sistema climático SISTEA",
+        stat_2_value: "360°",
+        stat_2_label: "ingeniería, ejecución y acompañamiento",
+        stat_3_value: "24/7",
+        stat_3_label: "visión enfocada en resiliencia operativa",
+        stat_4_value: "1",
+        stat_4_label: "interlocutor técnico para todo el proyecto",
+        trust_1: "Industria",
+        trust_2: "Hospitales",
+        trust_3: "Hoteles",
+        trust_4: "Centros logísticos",
+        trust_5: "Desarrollos inmobiliarios",
+        trust_6: "Cadena de frío",
+        solutions_title: "Soluciones que unen eficiencia, control y retorno",
+        solutions_text: "Cada proyecto parte de una lógica clara: reducir costos, mejorar desempeño técnico y crear una estructura energética más estable para tu empresa.",
+        sol_1_title: "Climatización industrial de alto rendimiento",
+        sol_1_text: "Sistemas de deshumidificación, enfriamiento adiabático en dos etapas y control inteligente para ambientes exigentes con enfoque en confort, proceso y eficiencia.",
+        sol_2_title: "Energía fotovoltaica con almacenamiento",
+        sol_2_text: "Autogeneración, almacenamiento en baterías y gestión de cargas para disminuir consumo de red, reducir riesgos operativos y mejorar previsibilidad financiera.",
+        sol_3_title: "Automatización inteligente",
+        sol_3_text: "Control centralizado de sistemas climáticos y energéticos con lógica de operación optimizada, datos útiles y decisiones técnicas mejor fundamentadas.",
+        sol_4_title: "Refrigeración y cadena de frío",
+        sol_4_text: "Soluciones para preservar producto, mejorar estabilidad térmica y contener pérdidas energéticas en instalaciones comerciales e industriales.",
+        sol_5_title: "Ventilación y calidad de aire",
+        sol_5_text: "Diseño de ventilación mecánica, renovación de aire y control ambiental para espacios donde la salud, la productividad y la continuidad importan.",
+        sol_6_title: "Recubrimientos térmicos y protección superficial",
+        sol_6_text: "Aplicaciones interiores y exteriores para reducir carga térmica, reforzar durabilidad y mejorar el desempeño global del inmueble.",
+        sectors_title: "Pensado para entornos donde fallar cuesta caro",
+        sectors_text: "Trabajamos para organizaciones que necesitan continuidad, control de costos y decisiones basadas en datos.",
+        sector_1_title: "Industria",
+        sector_1_text: "Producción más estable, menor carga térmica y mejor control de consumo.",
+        sector_2_title: "Hospitales",
+        sector_2_text: "Confort crítico, aire más seguro y alta confiabilidad operativa.",
+        sector_3_title: "Hoteles",
+        sector_3_text: "Experiencia superior para el huésped con costos energéticos más controlados.",
+        sector_4_title: "Bienes raíces y comercio",
+        sector_4_text: "Mayor valor operativo del activo y mejor posicionamiento técnico del proyecto.",
+        adv_title: "Por qué los directivos nos escuchan",
+        adv_text: "Porque combinamos criterio técnico, visión económica y ejecución real. Eso reduce errores, retrabajos y decisiones costosas.",
+        adv_1_title: "Un solo enfoque. Menos fricción.",
+        adv_1_li_1: "Ingeniería, análisis de viabilidad y dirección de proyecto.",
+        adv_1_li_2: "Integración de energía, clima, control y eficiencia.",
+        adv_1_li_3: "Interlocución clara para dirección, operaciones y finanzas.",
+        adv_2_title: "Resultados que impactan el negocio",
+        adv_2_li_1: "Menor consumo eléctrico y mejor estabilidad operativa.",
+        adv_2_li_2: "Mayor resiliencia frente a picos de demanda y fallas de red.",
+        adv_2_li_3: "Base técnica sólida para decisiones de inversión y financiamiento verde.",
+        process_title: "Así trabajamos",
+        process_text: "Proceso claro. Enfoque ejecutivo. Decisiones basadas en datos y factibilidad.",
+        process_1_title: "Diagnóstico",
+        process_1_text: "Analizamos consumo, cargas, operación, prioridades y restricciones reales.",
+        process_2_title: "Diseño",
+        process_2_text: "Desarrollamos una solución integrada con lógica técnica y económica.",
+        process_3_title: "Implementación",
+        process_3_text: "Coordinamos ejecución, proveedores, ingeniería de detalle y control de calidad.",
+        process_4_title: "Optimización",
+        process_4_text: "Ajustamos operación y acompañamos para sostener el desempeño en el tiempo.",
+        contact_title: "El siguiente paso puede ser estratégico",
+        contact_text: "Si tu empresa busca reducir costos energéticos, mejorar confiabilidad o estructurar un proyecto sólido, conversemos.",
+        contact_cta_1: "Escríbenos por WhatsApp",
+        contact_cta_2: "Enviar correo",
+        contact_box_title: "Contacto",
+        contact_label_company: "Empresa:",
+        contact_label_phone: "Teléfono:",
+        contact_label_whatsapp: "WhatsApp:",
+        contact_label_email: "Correo:",
+        contact_label_web: "Sitio web:",
+        contact_label_location: "Ubicación:",
+        footer_text: "SISTEA S.A. de C.V. | Soluciones sostenibles de climatización, refrigeración, ventilación y energía para Centroamérica.",
+        green_finance: "Financiamiento verde 1,5 % – 6,71 %*",
+        trust_title: "Confianza para decisiones de inversión",
+        trust_text: "SISTEA conecta ingeniería, eficiencia energética, implementación y estructura financiera en proyectos con visión ejecutiva.",
+        logo_1: "Industria",
+        logo_2: "Hospitales",
+        logo_3: "Hoteles",
+        logo_4: "Cadena de frío",
+        logo_5: "Desarrolladores",
+        metric_1: "Ahorro posible en climatización con sistemas adiabáticos en dos etapas",
+        metric_2: "Ahorro energético posible con integración fotovoltaica",
+        metric_3: "Financiamiento verde posible desde 1,5 % según perfil bancario",
+        metric_4: "Planificación, financiamiento e instalación bajo una sola responsabilidad",
+        reference_title: "Dónde aportamos más valor",
+        reference_text: "Nuestros proyectos generan impacto cuando el consumo energético, la carga térmica, la continuidad operativa y la presión sobre márgenes exigen una solución integral.",
+        ref_tag_1: "Industria",
+        ref_title_1: "Producción con alta carga térmica",
+        ref_text_1: "Sistemas climáticos y energéticos para reducir costos operativos, estabilizar procesos y mejorar condiciones de trabajo.",
+        ref_tag_2: "Hospitales y hoteles",
+        ref_title_2: "Confort crítico y continuidad",
+        ref_text_2: "Soluciones para mantener calidad ambiental, confiabilidad y control de costos donde la operación no puede detenerse.",
+        ref_tag_3: "Inversión",
+        ref_title_3: "Proyectos con lógica técnica y financiera",
+        ref_text_3: "Estructuración enfocada en ahorro real, retorno medible, mejor previsibilidad y base sólida para financiamiento verde.",
+        whatsapp_label: "Contacto directo"
+      },
+      de: {
+        brand_subtitle: "Hochleistungs-Energie- und Klimatechnik",
+        nav_solutions: "Lösungen",
+        nav_sectors: "Branchen",
+        nav_process: "Ablauf",
+        nav_contact: "Kontakt",
+        eyebrow: "Europäische Technologie. Lokale Umsetzung. Messbare Ergebnisse.",
+        hero_title: "Senke deine Energiekosten. Verbessere dein Innenklima. Stärke deinen Betrieb.",
+        hero_text: "SISTEA verbindet Klimatisierung, Kältetechnik, Lüftung, Photovoltaik mit Batteriespeicher, intelligente Steuerung und thermische Beschichtungen für Unternehmen, die Effizienz, Zuverlässigkeit und Kontrolle verlangen.",
+        hero_cta_primary: "Strategische Analyse anfragen",
+        hero_cta_secondary: "Mit SISTEA sprechen",
+        meta_1: "Für Entscheider entwickelt",
+        meta_2: "Fokus auf echte Einsparung und Betriebssicherheit",
+        meta_3: "Technischer, finanzieller und strategischer Ansatz",
+        card_title: "Was SISTEA löst",
+        card_text: "Wir liefern auch Einzelkomponenten und spezifische Lösungen. Unser Hauptfokus und unsere größte Stärke liegen jedoch in komplexen Projekten von der Planung über Finanzierung, Lieferung bis zur Installation unter einer Gesamtverantwortung.",
+        stat_1_value: "5",
+        stat_1_label: "integrierte Module im SISTEA-Klimasystem",
+        stat_2_value: "360°",
+        stat_2_label: "Engineering, Umsetzung und Begleitung",
+        stat_3_value: "24/7",
+        stat_3_label: "Fokus auf operative Resilienz",
+        stat_4_value: "1",
+        stat_4_label: "technischer Ansprechpartner für das Gesamtprojekt",
+        trust_1: "Industrie",
+        trust_2: "Krankenhäuser",
+        trust_3: "Hotels",
+        trust_4: "Logistikzentren",
+        trust_5: "Immobilienprojekte",
+        trust_6: "Kühlkette",
+        solutions_title: "Lösungen, die Effizienz, Kontrolle und Ertrag verbinden",
+        solutions_text: "Jedes Projekt folgt einer klaren Logik: Kosten senken, technische Leistung verbessern und die Energieversorgung deines Unternehmens stabiler machen.",
+        sol_1_title: "Industrielle Hochleistungs-Klimatisierung",
+        sol_1_text: "Systeme zur Entfeuchtung, zweistufige adiabate Kühlung und intelligente Regelung für anspruchsvolle Umgebungen mit Fokus auf Komfort, Prozesssicherheit und Effizienz.",
+        sol_2_title: "Photovoltaik mit Batteriespeicher",
+        sol_2_text: "Eigenstromerzeugung, Batteriespeicher und Lastmanagement zur Senkung des Netzbezugs, Reduzierung operativer Risiken und besseren finanziellen Planbarkeit.",
+        sol_3_title: "Intelligente Automatisierung",
+        sol_3_text: "Zentrale Steuerung von Klima- und Energiesystemen mit optimierter Betriebslogik, verwertbaren Daten und besser fundierten technischen Entscheidungen.",
+        sol_4_title: "Kältetechnik und Kühlkette",
+        sol_4_text: "Lösungen zum Produktschutz, zur thermischen Stabilität und zur Begrenzung von Energieverlusten in gewerblichen und industriellen Anlagen.",
+        sol_5_title: "Lüftung und Luftqualität",
+        sol_5_text: "Planung mechanischer Lüftung, Frischluftversorgung und Umweltkontrolle für Bereiche, in denen Gesundheit, Produktivität und Kontinuität entscheidend sind.",
+        sol_6_title: "Thermische Beschichtungen und Oberflächenschutz",
+        sol_6_text: "Anwendungen innen und außen zur Reduzierung der Wärmelast, Erhöhung der Lebensdauer und Verbesserung der Gesamtleistung des Gebäudes.",
+        sectors_title: "Entwickelt für Umgebungen, in denen Ausfälle teuer werden",
+        sectors_text: "Wir arbeiten für Organisationen, die Kontinuität, Kostenkontrolle und datenbasierte Entscheidungen brauchen.",
+        sector_1_title: "Industrie",
+        sector_1_text: "Stabilere Produktion, geringere Wärmelast und bessere Verbrauchskontrolle.",
+        sector_2_title: "Krankenhäuser",
+        sector_2_text: "Kritischer Komfort, sicherere Luft und hohe Betriebssicherheit.",
+        sector_3_title: "Hotels",
+        sector_3_text: "Besseres Gästeerlebnis bei kontrollierteren Energiekosten.",
+        sector_4_title: "Immobilien und Handel",
+        sector_4_text: "Höherer operativer Wert der Immobilie und bessere technische Positionierung des Projekts.",
+        adv_title: "Warum Führungskräfte uns zuhören",
+        adv_text: "Weil wir technische Kompetenz, wirtschaftliche Sicht und echte Umsetzung verbinden. Das reduziert Fehler, Nacharbeit und teure Fehlentscheidungen.",
+        adv_1_title: "Ein Ansatz. Weniger Reibung.",
+        adv_1_li_1: "Engineering, Machbarkeitsanalyse und Projektleitung.",
+        adv_1_li_2: "Integration von Energie, Klima, Steuerung und Effizienz.",
+        adv_1_li_3: "Klare Kommunikation für Geschäftsführung, Betrieb und Finanzen.",
+        adv_2_title: "Ergebnisse mit Wirkung auf das Geschäft",
+        adv_2_li_1: "Niedrigerer Stromverbrauch und höhere Betriebsstabilität.",
+        adv_2_li_2: "Mehr Resilienz bei Lastspitzen und Netzausfällen.",
+        adv_2_li_3: "Solide technische Grundlage für Investitionsentscheidungen und grüne Finanzierungen.",
+        process_title: "So arbeiten wir",
+        process_text: "Klarer Ablauf. Strategischer Fokus. Entscheidungen auf Basis von Daten und Machbarkeit.",
+        process_1_title: "Analyse",
+        process_1_text: "Wir prüfen Verbrauch, Lasten, Betrieb, Prioritäten und reale Randbedingungen.",
+        process_2_title: "Konzept",
+        process_2_text: "Wir entwickeln eine integrierte Lösung mit technischer und wirtschaftlicher Logik.",
+        process_3_title: "Umsetzung",
+        process_3_text: "Wir koordinieren Ausführung, Lieferanten, Detailengineering und Qualitätskontrolle.",
+        process_4_title: "Optimierung",
+        process_4_text: "Wir justieren den Betrieb und begleiten das Projekt für dauerhaft hohe Leistung.",
+        contact_title: "Der nächste Schritt kann strategisch sein",
+        contact_text: "Wenn dein Unternehmen Energiekosten senken, Zuverlässigkeit erhöhen oder ein belastbares Projekt strukturieren will, sollten wir sprechen.",
+        contact_cta_1: "Über WhatsApp schreiben",
+        contact_cta_2: "E-Mail senden",
+        contact_box_title: "Kontakt",
+        contact_label_company: "Unternehmen:",
+        contact_label_phone: "Telefon:",
+        contact_label_whatsapp: "WhatsApp:",
+        contact_label_email: "E-Mail:",
+        contact_label_web: "Webseite:",
+        contact_label_location: "Standort:",
+        footer_text: "SISTEA S.A. de C.V. | Nachhaltige Lösungen für Klimatisierung, Kältetechnik, Lüftung und Energie in Zentralamerika.",
+        green_finance: "Grüne Finanzierung 1,5 % – 6,71 %*",
+        trust_title: "Vertrauen für Investitionsentscheidungen",
+        trust_text: "SISTEA verbindet Engineering, Energieeffizienz, Umsetzung und Finanzierungsstruktur in Projekten mit klarem Managementfokus.",
+        logo_1: "Industrie",
+        logo_2: "Krankenhäuser",
+        logo_3: "Hotels",
+        logo_4: "Kühlkette",
+        logo_5: "Projektentwickler",
+        metric_1: "Mögliches Einsparpotenzial in der Klimatisierung mit zweistufigen adiabaten Systemen",
+        metric_2: "Mögliches Energieeinsparpotenzial mit integrierter Photovoltaik",
+        metric_3: "Grüne Finanzierung ab 1,5 % möglich je nach Bankprofil",
+        metric_4: "Planung, Finanzierung und Installation unter einer Gesamtverantwortung",
+        reference_title: "Wo wir den größten Mehrwert schaffen",
+        reference_text: "Unsere Projekte erzeugen Wirkung, wenn Energiekosten, Wärmelast, Betriebssicherheit und Margendruck eine integrierte Lösung verlangen.",
+        ref_tag_1: "Industrie",
+        ref_title_1: "Produktion mit hoher Wärmelast",
+        ref_text_1: "Klima- und Energiesysteme zur Senkung der Betriebskosten, Stabilisierung der Prozesse und Verbesserung der Arbeitsbedingungen.",
+        ref_tag_2: "Krankenhäuser und Hotels",
+        ref_title_2: "Kritischer Komfort und Kontinuität",
+        ref_text_2: "Lösungen für Luftqualität, Zuverlässigkeit und Kostenkontrolle dort, wo der Betrieb nicht stillstehen darf.",
+        ref_tag_3: "Investition",
+        ref_title_3: "Projekte mit technischer und finanzieller Logik",
+        ref_text_3: "Strukturierung mit Fokus auf echte Einsparung, messbaren Ertrag, bessere Planbarkeit und belastbare Basis für grüne Finanzierung.",
+        whatsapp_label: "Direkter Kontakt"
+      },
+      en: {
+        brand_subtitle: "High-performance energy and climate engineering",
+        nav_solutions: "Solutions",
+        nav_sectors: "Sectors",
+        nav_process: "Process",
+        nav_contact: "Contact",
+        eyebrow: "European technology. Local execution. Measurable results.",
+        hero_title: "Reduce your energy cost. Improve indoor climate. Strengthen your operation.",
+        hero_text: "SISTEA integrates climate systems, refrigeration, ventilation, photovoltaic power with battery storage, intelligent automation and thermal coatings for companies that demand efficiency, reliability and control.",
+        hero_cta_primary: "Request your strategic assessment",
+        hero_cta_secondary: "Talk to SISTEA",
+        meta_1: "Built for decision-makers",
+        meta_2: "Focused on real savings and operational continuity",
+        meta_3: "Technical, financial and executive perspective",
+        card_title: "What SISTEA solves",
+        card_text: "We also supply individual components and specific solutions. Our main focus and strongest capacity are complex projects from planning and financing to supply and installation under one responsibility.",
+        stat_1_value: "5",
+        stat_1_label: "integrated modules in the SISTEA climate system",
+        stat_2_value: "360°",
+        stat_2_label: "engineering, execution and support",
+        stat_3_value: "24/7",
+        stat_3_label: "focus on operational resilience",
+        stat_4_value: "1",
+        stat_4_label: "technical point of contact for the full project",
+        trust_1: "Industry",
+        trust_2: "Hospitals",
+        trust_3: "Hotels",
+        trust_4: "Logistics centers",
+        trust_5: "Real estate developments",
+        trust_6: "Cold chain",
+        solutions_title: "Solutions that combine efficiency, control and return",
+        solutions_text: "Every project follows a clear logic: lower cost, improve technical performance and build a more stable energy structure for your company.",
+        sol_1_title: "High-performance industrial climate systems",
+        sol_1_text: "Dehumidification systems, two-stage adiabatic cooling and intelligent control for demanding environments with a focus on comfort, process and efficiency.",
+        sol_2_title: "Photovoltaic power with battery storage",
+        sol_2_text: "Self-generation, battery storage and load management to reduce grid consumption, lower operating risk and improve financial predictability.",
+        sol_3_title: "Intelligent automation",
+        sol_3_text: "Centralized control of climate and energy systems with optimized operating logic, useful data and better-grounded technical decisions.",
+        sol_4_title: "Refrigeration and cold chain",
+        sol_4_text: "Solutions to protect product, improve thermal stability and contain energy losses in commercial and industrial facilities.",
+        sol_5_title: "Ventilation and air quality",
+        sol_5_text: "Mechanical ventilation design, fresh air renewal and environmental control for spaces where health, productivity and continuity matter.",
+        sol_6_title: "Thermal coatings and surface protection",
+        sol_6_text: "Interior and exterior applications that reduce heat load, improve durability and raise overall building performance.",
+        sectors_title: "Built for environments where failure is expensive",
+        sectors_text: "We work for organizations that need continuity, cost control and data-based decisions.",
+        sector_1_title: "Industry",
+        sector_1_text: "More stable production, lower heat load and better consumption control.",
+        sector_2_title: "Hospitals",
+        sector_2_text: "Critical comfort, safer air and high operational reliability.",
+        sector_3_title: "Hotels",
+        sector_3_text: "A better guest experience with tighter control of energy costs.",
+        sector_4_title: "Real estate and commerce",
+        sector_4_text: "Higher asset operating value and stronger technical positioning of the project.",
+        adv_title: "Why executives listen to us",
+        adv_text: "Because we combine technical judgment, economic perspective and real execution. That reduces errors, rework and costly decisions.",
+        adv_1_title: "One approach. Less friction.",
+        adv_1_li_1: "Engineering, feasibility analysis and project leadership.",
+        adv_1_li_2: "Integration of energy, climate, control and efficiency.",
+        adv_1_li_3: "Clear communication for management, operations and finance.",
+        adv_2_title: "Business-relevant outcomes",
+        adv_2_li_1: "Lower electricity consumption and better operating stability.",
+        adv_2_li_2: "Greater resilience against peak demand and grid failure.",
+        adv_2_li_3: "A strong technical basis for investment decisions and green financing.",
+        process_title: "How we work",
+        process_text: "Clear process. Executive focus. Decisions grounded in data and feasibility.",
+        process_1_title: "Assessment",
+        process_1_text: "We analyze consumption, loads, operations, priorities and real constraints.",
+        process_2_title: "Design",
+        process_2_text: "We develop an integrated solution with technical and economic logic.",
+        process_3_title: "Implementation",
+        process_3_text: "We coordinate execution, suppliers, detailed engineering and quality control.",
+        process_4_title: "Optimization",
+        process_4_text: "We fine-tune operations and support long-term performance.",
+        contact_title: "Your next step can be strategic",
+        contact_text: "If your company wants to reduce energy cost, improve reliability or structure a solid project, let’s talk.",
+        contact_cta_1: "Message us on WhatsApp",
+        contact_cta_2: "Send email",
+        contact_box_title: "Contact",
+        contact_label_company: "Company:",
+        contact_label_phone: "Phone:",
+        contact_label_whatsapp: "WhatsApp:",
+        contact_label_email: "Email:",
+        contact_label_web: "Website:",
+        contact_label_location: "Location:",
+        footer_text: "SISTEA S.A. de C.V. | Sustainable climate, refrigeration, ventilation and energy solutions for Central America.",
+        green_finance: "Green financing 1.5% – 6.71%*",
+        trust_title: "Trust for investment decisions",
+        trust_text: "SISTEA brings together engineering, energy efficiency, implementation and financing structure in projects with a clear executive focus.",
+        logo_1: "Industry",
+        logo_2: "Hospitals",
+        logo_3: "Hotels",
+        logo_4: "Cold chain",
+        logo_5: "Developers",
+        metric_1: "Potential climate savings with two-stage adiabatic systems",
+        metric_2: "Potential energy savings with integrated photovoltaic systems",
+        metric_3: "Green financing possible from 1.5% depending on banking profile",
+        metric_4: "Planning, financing and installation under one responsibility",
+        reference_title: "Where we create the most value",
+        reference_text: "Our projects create impact when energy cost, heat load, operational continuity and margin pressure demand an integrated solution.",
+        ref_tag_1: "Industry",
+        ref_title_1: "Production with high heat load",
+        ref_text_1: "Climate and energy systems that reduce operating cost, stabilize processes and improve working conditions.",
+        ref_tag_2: "Hospitals and hotels",
+        ref_title_2: "Critical comfort and continuity",
+        ref_text_2: "Solutions that maintain environmental quality, reliability and cost control where operations cannot stop.",
+        ref_tag_3: "Investment",
+        ref_title_3: "Projects with technical and financial logic",
+        ref_text_3: "Structured around real savings, measurable return, stronger predictability and a solid basis for green financing.",
+        whatsapp_label: "Direct contact"
+      }
+    };
+
+    const elements = document.querySelectorAll('[data-i18n]');
+    const buttons = document.querySelectorAll('.lang-btn');
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.es;
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.documentElement.lang = lang;
+      buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      localStorage.setItem('sistea_lang', lang);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(localStorage.getItem('sistea_lang') || 'es');
+
+    const counters = document.querySelectorAll('[data-count]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseFloat(el.getAttribute('data-count'));
+        const suffix = el.textContent.includes('%+') ? '%+' : el.textContent.includes('°') ? '°' : '%';
+        const duration = 1400;
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const value = target * progress;
+          if (target < 10 && suffix === '%') {
+            el.textContent = value.toFixed(1).replace('.', ',') + '%';
+          } else {
+            el.textContent = Math.round(value) + suffix;
+          }
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            if (target === 1.5) el.textContent = '1,5%';
+            if (target === 90) el.textContent = '90%+';
+            if (target === 360) el.textContent = '360°';
+            if (target === 70) el.textContent = '70%';
+          }
+        }
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.35 });
+
+    counters.forEach(counter => observer.observe(counter));
+  </script>
+</body>
+</html>
