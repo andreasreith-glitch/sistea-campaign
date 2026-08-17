@@ -1,4 +1,4 @@
-name: Probe Live SISTEA RFQ
+name: Probe RFQ Branch Preview
 
 on:
   push:
@@ -6,14 +6,25 @@ on:
 
 jobs:
   probe:
-    if: github.event.head_commit.message == 'Probe live RFQ now'
+    if: github.event.head_commit.message == 'Probe RFQ branch preview'
     runs-on: ubuntu-latest
     steps:
-      - name: Probe live route
+      - name: Verify RFQ preview routes
         run: |
-          for path in /de/wholesale-rfq /es/wholesale-rfq /en/wholesale-rfq; do
-            echo "=== $path ==="
-            curl -sS -D - -o /tmp/body "https://sisteasv.com$path" | head -20
-            echo '--- body markers ---'
-            grep -Eo 'Geräte und Ersatzteile|equipos y repuestos|equipment and spare parts|404|Not Found' /tmp/body | head -10 || true
+          BASE='https://agent-wholesale-rfq-tool.sistea-digital-platform.pages.dev'
+          for entry in 'de|Geräte und Ersatzteile' 'es|equipos y repuestos' 'en|equipment and spare parts'; do
+            locale="${entry%%|*}"
+            marker="${entry#*|}"
+            url="$BASE/$locale/wholesale-rfq"
+            code=$(curl -sS -o /tmp/body -w '%{http_code}' "$url")
+            echo "$locale HTTP $code"
+            test "$code" = "200"
+            grep -qi "$marker" /tmp/body
           done
+      - name: Verify RFQ API method protection
+        run: |
+          BASE='https://agent-wholesale-rfq-tool.sistea-digital-platform.pages.dev'
+          code=$(curl -sS -o /tmp/api -w '%{http_code}' "$BASE/api/rfq")
+          echo "GET /api/rfq HTTP $code"
+          test "$code" = "405"
+          grep -q 'method_not_allowed' /tmp/api
