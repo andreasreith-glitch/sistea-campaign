@@ -1,0 +1,54 @@
+name: Check Live SISTEA RFQ
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    if: github.event.head_commit.message == 'Check live RFQ deployment'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for live RFQ route
+        run: |
+          BASE='https://sisteasv.com'
+          for i in $(seq 1 24); do
+            code=$(curl -sS -o /tmp/de.html -w '%{http_code}' "$BASE/de/wholesale-rfq")
+            if [ "$code" = "200" ] && grep -q 'Geräte und Ersatzteile' /tmp/de.html; then
+              echo 'Live RFQ route is available'
+              exit 0
+            fi
+            echo "Attempt $i: HTTP $code"
+            sleep 10
+          done
+          echo 'Live RFQ route not available' >&2
+          exit 1
+
+      - name: Verify localized live pages
+        run: |
+          BASE='https://sisteasv.com'
+          curl -fsS "$BASE/es/wholesale-rfq" | grep -q 'equipos y repuestos'
+          curl -fsS "$BASE/en/wholesale-rfq" | grep -q 'equipment and spare parts'
+
+      - name: Submit production RFQ with attachment
+        run: |
+          URL='https://sisteasv.com/api/contact'
+          PNG='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII='
+          cat > /tmp/rfq.json <<JSON
+          {
+            "name":"SISTEA Production RFQ Test",
+            "company":"SISTEA S.A. de C.V.",
+            "email":"info@sisteasv.com",
+            "phone":"+503 7728-2624",
+            "country":"El Salvador",
+            "locale":"de",
+            "consent":true,
+            "website":"",
+            "requestType":"rfq",
+            "rfqId":"SISTEA-RFQ-PRODUCTION-TEST",
+            "message":"PRODUCTION TEST ONLY - Equipment RFQ routing and attachment verification after deployment.",
+            "attachments":[{"filename":"rfq-production-test.png","content":"$PNG","contentType":"image/png","size":68}]
+          }
+          JSON
+          curl -fsS -X POST "$URL" -H 'Content-Type: application/json' --data-binary @/tmp/rfq.json | tee /tmp/rfq-response.json
+          grep -q '"success":true' /tmp/rfq-response.json
