@@ -1,4 +1,4 @@
-name: Probe RFQ Branch Preview
+name: Probe Live RFQ After Production Merge
 
 on:
   push:
@@ -6,25 +6,29 @@ on:
 
 jobs:
   probe:
-    if: github.event.head_commit.message == 'Probe RFQ branch preview'
+    if: github.event.head_commit.message == 'Probe live RFQ after production merge'
     runs-on: ubuntu-latest
     steps:
-      - name: Verify RFQ preview routes
+      - name: Wait for production deployment and verify localized routes
         run: |
-          BASE='https://agent-wholesale-rfq-tool.sistea-digital-platform.pages.dev'
-          for entry in 'de|Geräte und Ersatzteile' 'es|equipos y repuestos' 'en|equipment and spare parts'; do
-            locale="${entry%%|*}"
-            marker="${entry#*|}"
-            url="$BASE/$locale/wholesale-rfq"
-            code=$(curl -sS -o /tmp/body -w '%{http_code}' "$url")
-            echo "$locale HTTP $code"
-            test "$code" = "200"
-            grep -qi "$marker" /tmp/body
+          BASE='https://sisteasv.com'
+          for attempt in $(seq 1 24); do
+            ok=1
+            for entry in 'de|Geräte und Ersatzteile' 'es|equipos y repuestos' 'en|equipment and spare parts'; do
+              locale="${entry%%|*}"
+              marker="${entry#*|}"
+              url="$BASE/$locale/wholesale-rfq"
+              code=$(curl -sS -o /tmp/body -w '%{http_code}' "$url")
+              echo "attempt=$attempt locale=$locale HTTP=$code"
+              if [ "$code" != "200" ] || ! grep -qi "$marker" /tmp/body; then ok=0; fi
+            done
+            if [ "$ok" = "1" ]; then exit 0; fi
+            sleep 10
           done
-      - name: Verify RFQ API method protection
+          exit 1
+      - name: Verify production RFQ API method protection
         run: |
-          BASE='https://agent-wholesale-rfq-tool.sistea-digital-platform.pages.dev'
-          code=$(curl -sS -o /tmp/api -w '%{http_code}' "$BASE/api/rfq")
+          code=$(curl -sS -o /tmp/api -w '%{http_code}' 'https://sisteasv.com/api/rfq')
           echo "GET /api/rfq HTTP $code"
           test "$code" = "405"
           grep -q 'method_not_allowed' /tmp/api
