@@ -1,0 +1,19 @@
+name: Probe Live SISTEA RFQ
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  probe:
+    if: github.event.head_commit.message == 'Probe live RFQ now'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe live route
+        run: |
+          for path in /de/wholesale-rfq /es/wholesale-rfq /en/wholesale-rfq; do
+            echo "=== $path ==="
+            curl -sS -D - -o /tmp/body "https://sisteasv.com$path" | head -20
+            echo '--- body markers ---'
+            grep -Eo 'Geräte und Ersatzteile|equipos y repuestos|equipment and spare parts|404|Not Found' /tmp/body | head -10 || true
+          done
